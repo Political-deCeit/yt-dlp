@@ -2523,6 +2523,12 @@ class GenericIE(InfoExtractor):
             return merge_dicts(embeds[0], info_dict)
         elif embeds:
             return self.playlist_result(embeds, **info_dict)
+        else:
+            info_dict.update({
+                'url': url,
+                'warning': 'Unable to extract video data',
+            }) 
+            return info_dict
         raise UnsupportedError(url)
 
     def _extract_embeds(self, url, webpage, *, urlh=None, info_dict={}):
